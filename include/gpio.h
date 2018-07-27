@@ -1,3 +1,6 @@
+#ifndef _GPIO_H
+#define _GPIO_H
+
 #define PORTA 0
 #define PORTB 1
 #define PORTC 2
@@ -42,11 +45,9 @@ typedef enum
 } hal_gpio_direction_t;
 
 
-// hal_err_t hal_gpio_init_analog(hal_port_t port, hal_pin_t pin);
 hal_err_t hal_gpio_init_digital(hal_gpio_direction_t direction, hal_port_t port, hal_pin_t pin);
 hal_err_t hal_gpio_read(hal_port_t port, hal_pin_t pin, uint8_t *state);
 hal_err_t hal_gpio_write(hal_port_t port, hal_pin_t pin, uint8_t state);
 hal_err_t hal_gpio_toggle(hal_port_t port, hal_pin_t pin);
 
-// hal_err_t hal_gpio_set(hal_port_t port, hal_pin_t pin);
-// hal_err_t hal_gpio_rst(hal_port_t port, hal_pin_t pin);
+#endif // _GPIO_H

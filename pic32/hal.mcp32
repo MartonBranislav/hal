@@ -18,17 +18,20 @@ Value=
 [FILES]
 File0=gpio.c
 File1=main.c
-Count=2
+File2=bsp.c
+Count=3
 [BINARIES]
 Count=0
 [IMAGES]
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-File0=gpio.h
-File1=main.c
-File2=gpio.asm
-Count=3
+File0=main.c
+File1=gpio.c
+File2=bsp.c
+File3=..\include\bsp.h
+File4=..\include\gpio.h
+Count=5
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -38,10 +41,10 @@ Count=0
 [SEARCH_PATH]
 Count=0
 [HEADER_PATH]
-Count=0
-[HEADERS]
-File0=gpio.h
+Path0=..\include\
 Count=1
+[HEADERS]
+Count=0
 [PLDS]
 Count=0
 [Useses]
@@ -54,5 +57,4 @@ USE_SRS=7
 [EXPANDED_NODES]
 0=hal.mcp32
 1=Sources
-4=Header Files
-Count=3
+Count=2

@@ -10,3 +10,9 @@
 *.lst
 *.dic
 *.mcp32_callertable.txt
+*.ini
+*.bmk
+*.wch
+*.bin
+*.brk
+*.mcpar_callertable.txt

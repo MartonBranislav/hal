@@ -39,8 +39,8 @@ typedef enum {
 
 typedef enum 
 {
-    MIKROBUS_OUT = 0,
-    MIKROBUS_IN = 1,
+    MIKROBUS_OUT = 1,
+    MIKROBUS_IN = 0,
 } mikrobus_dir_t;
 
 void bsp_mikrobus_init_digital(mikrobus_dir_t dir, mikrobus_t bus, mikrobus_pin_t pin);

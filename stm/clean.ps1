@@ -1,0 +1,12 @@
+Remove-Item *.asm
+Remove-Item *.cp
+Remove-Item *.emcl
+Remove-Item *.mil
+Remove-Item *.dbg
+Remove-Item *.dct
+Remove-Item *.dlt
+Remove-Item *.hex
+Remove-Item *.lst
+Remove-Item *.dic
+Remove-Item *.log
+Remove-Item *.mcp32_callertable.txt

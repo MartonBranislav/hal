@@ -65,7 +65,7 @@ void toggle(REGS *regs, hal_pin_t pin)
 hal_err_t hal_gpio_init_digital(hal_gpio_direction_t direction, hal_port_t port, hal_pin_t pin)
 {
     if (port == PORTB)
-        AD1PCFG |= 1 << pin;
+        AD1PCFG |= (unsigned long)0x01 << pin;
 
     set_direction((REGS*)TRISREGS[port], direction, pin);
     return HAL_ERR_OK;
