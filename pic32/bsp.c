@@ -51,14 +51,15 @@ void bsp_mikrobus_init_digital(mikrobus_dir_t dir, mikrobus_t bus, mikrobus_pin_
     hal_gpio_init_digital(dir, pinout->port, pinout->pin);
 }
 
-void bsp_mikrobus_set(mikrobus_t bus, mikrobus_pin_t pin)
+bsp_err_t bsp_mikrobus_set(mikrobus_t bus, mikrobus_pin_t pin)
 {
     bsp_gpio_t *pinout = &_mikrobus_map[bus][pin];
     if (bus > MIKROBUS_COUNT - 1)
-        return;
+        return BSP_ERROR_MIKROBUS_SELECTION;
     if (pin > MIKROBUS_PIN_COUNT - 1)
-        return;
+        return BSP_ERROR_MIKROBUS_PIN;
     hal_gpio_write(pinout->port, pinout->pin, 1);
+    return BSP_OK;
 }
 
 void bsp_mikrobus_rst(mikrobus_t bus, mikrobus_pin_t pin)
@@ -79,4 +80,17 @@ void bsp_mikrobus_toggle(mikrobus_t bus, mikrobus_pin_t pin)
     if (pin > MIKROBUS_PIN_COUNT - 1)
         return;
     hal_gpio_toggle(pinout->port, pinout->pin);
+}
+
+bsp_err_t bsp_uart_write(bsp_uart_channel_t channel, uint8_t data)
+{
+    // channel -> bus, pin.
+    bsp_gpio_t *pinout = &_mikrobus_map[bus][pin];
+    hal_uart_module_t module = hal_uart_get_module(pinout->port, pinout->pin);
+    hal_uart_write(module, data);
+}
+
+bsp_err_t bsp_uart_read(bsp_uart_channel_t channel, uint8_t *data)
+{
+
 }

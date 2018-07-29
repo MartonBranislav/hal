@@ -43,7 +43,13 @@ typedef enum
     MIKROBUS_IN = 0,
 } mikrobus_dir_t;
 
-void bsp_mikrobus_init_digital(mikrobus_dir_t dir, mikrobus_t bus, mikrobus_pin_t pin);
-void bsp_mikrobus_set(mikrobus_t bus, mikrobus_pin_t pin);
-void bsp_mikrobus_rst(mikrobus_t bus, mikrobus_pin_t pin);
-void bsp_mikrobus_toggle(mikrobus_t bus, mikrobus_pin_t pin);
+typedef uint8_t bsp_uart_channel_t;
+typedef uint8_t bsp_err_t;
+
+bsp_err_t bsp_mikrobus_init_digital(mikrobus_dir_t dir, mikrobus_t bus, mikrobus_pin_t pin);
+bsp_err_t bsp_mikrobus_set(mikrobus_t bus, mikrobus_pin_t pin);
+bsp_err_t bsp_mikrobus_rst(mikrobus_t bus, mikrobus_pin_t pin);
+bsp_err_t bsp_mikrobus_toggle(mikrobus_t bus, mikrobus_pin_t pin);
+
+bsp_err_t bsp_uart_write(bsp_uart_channel_t channel, uint8_t data);
+bsp_err_t bsp_uart_read(bsp_uart_channel_t channel, uint8_t *data);
