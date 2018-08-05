@@ -1,4 +1,7 @@
-#include <stdint.h>
+#ifndef _BSP_H
+#define _BSP_H
+
+#include "hal.h"
 
 #define MIKROBUS_PIN_COUNT (12)
 
@@ -18,7 +21,7 @@ typedef enum {
 } mikrobus_pin_t;
 
 
- typedef enum {
+typedef enum {
     MIKROBUS_1 = 0,
     MIKROBUS_2 = 2,
     MIKROBUS_3 = 3,
@@ -43,6 +46,13 @@ typedef enum
     MIKROBUS_IN = 0,
 } mikrobus_dir_t;
 
+typedef enum
+{
+    BSP_ERR_OK = 0,
+    BSP_ERROR_INVALID_PIN,
+    BSP_ERROR_HAL
+} bsp_err_t;
+
 typedef uint8_t bsp_uart_channel_t;
 typedef uint8_t bsp_err_t;
 
@@ -53,3 +63,5 @@ bsp_err_t bsp_mikrobus_toggle(mikrobus_t bus, mikrobus_pin_t pin);
 
 bsp_err_t bsp_uart_write(bsp_uart_channel_t channel, uint8_t data);
 bsp_err_t bsp_uart_read(bsp_uart_channel_t channel, uint8_t *data);
+
+#endif // _BSP_H

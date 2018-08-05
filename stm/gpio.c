@@ -1,4 +1,4 @@
-#include "gpio.h"
+#include "hal/gpio.h"
 
 #define GPIO_PORT_COUNT (5)
 
@@ -28,7 +28,7 @@ hal_err_t _write(gpio_reg_map_t *base, hal_pin_t pin, uint8_t state)
         base->bsrr = (0x00000001 << pin);
     else
         base->bsrr = (0x00010000 << pin);
-        // base->brr = (0x00000001 << pin);
+    return HAL_ERR_OK;
 }
 
 uint32_t _read(gpio_reg_map_t *base, hal_pin_t pin)
@@ -79,21 +79,22 @@ hal_err_t hal_gpio_init_digital(hal_gpio_direction_t direction, hal_port_t port,
     }
 }
 
-hal_err_t hal_gpio_read(hal_port_t port, hal_pin_t pin, uint8_t *state)
-{
-    *state = _read((gpio_reg_map_t*)gpio_port_addr[port], pin);
-}
-
 hal_err_t hal_gpio_write(hal_port_t port, hal_pin_t pin, uint8_t state)
 {
     _write((gpio_reg_map_t*)gpio_port_addr[port], pin, state);
     return HAL_ERR_OK;
 }
 
+hal_err_t hal_gpio_read(hal_port_t port, hal_pin_t pin, uint8_t *state)
+{
+    *state = _read((gpio_reg_map_t*)gpio_port_addr[port], pin);
+}
+
 hal_err_t hal_gpio_toggle(hal_port_t port, hal_pin_t pin)
 {
     uint32_t state = _read((gpio_reg_map_t*)gpio_port_addr[port], pin);
     _write((gpio_reg_map_t*)gpio_port_addr[port], pin, state ? 0 : 1);
+    return HAL_ERR_OK;
 }
 
 // void GPIO_Digital_Output(unsigned long *port, unsigned long pin_mask){

@@ -1,5 +1,5 @@
-#include "bsp.h"
-#include "gpio.h"
+#include "hal/bsp.h"
+#include "hal/gpio.h"
 #define MIKROBUS_COUNT (2)
 
 typedef struct

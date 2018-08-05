@@ -27,29 +27,10 @@
 #define PIN14 14
 #define PIN15 15
 
-#include <stdint.h>
+#include "hal.h"
 
-typedef enum
-{
-    HAL_ERR_OK = 0,
-    HAL_ERR_INVALID_INPUT_ARGUMENTS,
-} hal_err_t;
+typedef void(*hal_gpio_callback_t)();
 
-typedef uint8_t hal_port_t;
-typedef uint8_t hal_pin_t;
-typedef void(*interrupt_callback_t)();
-
-typedef enum
-{
-    HAL_GPIO_IN = 0,
-    HAL_GPIO_OUT = 1
-} hal_gpio_direction_t;
-
-typedef enum
-{
-    HAL_GPIO_LOW = 0, 
-    HAL_GPIO_HIGH 
-} hal_gpio_state_t;
 
 /**
  * GPIO initialization function.
@@ -77,8 +58,7 @@ hal_err_t hal_gpio_write(hal_port_t port, hal_pin_t pin, uint8_t state);
 hal_err_t hal_gpio_register_write(uint32_t address, uint32_t value);
 hal_err_t hal_gpio_register_read(uint32_t address, uint32_t *value);
 
-
-hal_err_t hal_gpio_register_callback(interrupt_callback_t *callback);
+hal_err_t hal_gpio_register_callback(hal_gpio_callback_t *callback);
 
 hal_err_t hal_gpio_toggle(hal_port_t port, hal_pin_t pin);
 
