@@ -1,5 +1,6 @@
 #include "hal/bsp.h"
 #include "hal/gpio.h"
+#include "hal/spi.h"
 
 #define _MIKROBUS_COUNT (2)
 
@@ -42,6 +43,9 @@ bsp_gpio_t _mikrobus_map[_MIKROBUS_COUNT][MIKROBUS_PIN_COUNT] = {
     }
 };
 
+mikrobus_pin_t _spi_ss_pin[_MIKROBUS_COUNT];
+const spi_channel_t _spi_channel[_MIKROBUS_COUNT] = { 3, 3 };
+
 bsp_err_t bsp_mikrobus_init_digital(mikrobus_dir_t dir, mikrobus_t bus, mikrobus_pin_t pin)
 {
     bsp_gpio_t *pinout = &_mikrobus_map[bus][pin];
@@ -80,15 +84,29 @@ bsp_err_t bsp_mikrobus_toggle(mikrobus_t bus, mikrobus_pin_t pin)
         return BSP_ERROR_HAL;
 }
 
-// bsp_err_t bsp_uart_write(bsp_uart_channel_t channel, uint8_t data)
-// {
-//     // channel -> bus, pin.
-//     bsp_gpio_t *pinout = &_mikrobus_map[bus][pin];
-//     hal_uart_module_t module = hal_uart_get_module(pinout->port, pinout->pin);
-//     hal_uart_write(module, data);
-// }
+bsp_err_t bsp_mikrobus_spi_open(mikrobus_t bus, mikrobus_pin_t ss, spi_config_t config)
+{
+    _spi_ss_pin[bus] = ss;
+    bsp_mikrobus_set(bus, ss);
+    if (spi_open(_spi_channel[bus], config))
+        return BSP_ERROR_HAL;
+    return BSP_ERR_OK;
+}
 
-// bsp_err_t bsp_uart_read(bsp_uart_channel_t channel, uint8_t *data)
-// {
+bsp_err_t bsp_mikrobus_spi_close(mikrobus_t bus)
+{
+    bsp_mikrobus_rst(bus, _spi_ss_pin[bus]);
+    if (spi_close(_spi_channel[bus]))
+        return BSP_ERROR_HAL;
+    return BSP_ERR_OK;
+}
 
-// }
+bsp_err_t bsp_mikrobus_spi_transfer(mikrobus_t bus, spi_transfer_block_t tb)
+{
+    bsp_mikrobus_rst(bus, _spi_ss_pin[bus]);
+    if (spi_transfer(_spi_channel[bus], tb))
+        return BSP_ERROR_HAL;
+    bsp_mikrobus_set(bus, _spi_ss_pin[bus]);
+    return BSP_ERR_OK;
+}
+

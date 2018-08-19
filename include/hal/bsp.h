@@ -1,7 +1,8 @@
 #ifndef _BSP_H
 #define _BSP_H
 
-#include "hal.h"
+#include "hal/hal.h"
+#include "hal/spi.h"
 
 #define MIKROBUS_PIN_COUNT (12)
 
@@ -60,6 +61,10 @@ bsp_err_t bsp_mikrobus_init_digital(mikrobus_dir_t dir, mikrobus_t bus, mikrobus
 bsp_err_t bsp_mikrobus_set(mikrobus_t bus, mikrobus_pin_t pin);
 bsp_err_t bsp_mikrobus_rst(mikrobus_t bus, mikrobus_pin_t pin);
 bsp_err_t bsp_mikrobus_toggle(mikrobus_t bus, mikrobus_pin_t pin);
+
+bsp_err_t bsp_mikrobus_spi_open(mikrobus_t bus, mikrobus_pin_t ss, spi_config_t config);
+bsp_err_t bsp_mikrobus_spi_close(mikrobus_t bus);
+bsp_err_t bsp_mikrobus_spi_transfer(mikrobus_t bus, spi_transfer_block_t tb);
 
 bsp_err_t bsp_uart_write(bsp_uart_channel_t channel, uint8_t data);
 bsp_err_t bsp_uart_read(bsp_uart_channel_t channel, uint8_t *data);
