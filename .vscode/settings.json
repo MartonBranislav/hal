@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.qss": "css",
+        "bsp.h": "c",
+        "hal.h": "c",
+        "gpio.h": "c"
+    },
+    "C_Cpp.default.includePath": [
+        "include"
+    ]
+}

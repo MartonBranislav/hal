@@ -1,5 +1,5 @@
-#include "gpio.h"
-#include "bsp.h"
+#include "hal/gpio.h"
+#include "hal/bsp.h"
 
 void main()
 {
