@@ -27,7 +27,7 @@
 #define PIN14 14
 #define PIN15 15
 
-#include "hal.h"
+#include "hal/hal.h"
 
 typedef void(*hal_gpio_callback_t)();
 
